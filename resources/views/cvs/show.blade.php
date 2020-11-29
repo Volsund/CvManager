@@ -23,20 +23,28 @@
             </div>
             <div>
                 <h3>Education</h4>
-                    <p>{{ $education->institution_name }}</p>
-                    <p>{{ $education->faculty }}</p>
-                    <p>{{ $education->study_program }}</p>
-                    <p>{{ $education->degree }}</p>
-                    <p>{{ $education->years_studied }}</p>
-                    <p>{{ $education->status }}</p>
+                    @foreach ($institutions as $institution)
+                        <div id="education_div" style="border:dotted">
+                            <p>{{ $institution->institution_name }}</p>
+                            <p>{{ $institution->faculty }}</p>
+                            <p>{{ $institution->study_program }}</p>
+                            <p>{{ $institution->degree }}</p>
+                            <p>{{ $institution->years_studied }}</p>
+                            <p>{{ $institution->status }}</p>
+                        </div>
+                    @endforeach
             </div>
             <div>
                 <h3>Work Experience</h4>
-                    <p>{{ $work->company_name }}</p>
-                    <p>{{ $work->position }}</p>
-                    <p>{{ $work->schedule }}</p>
-                    <p>{{ $work->years_worked }}</p>
-                    <p>{{ $work->description }}</p>
+                    @foreach ($workplaces as $workplace)
+                        <div id="workplace_div" style="border:dotted">
+                            <p>{{ $workplace->company_name }}</p>
+                            <p>{{ $workplace->position }}</p>
+                            <p>{{ $workplace->schedule }}</p>
+                            <p>{{ $workplace->years_worked }}</p>
+                            <p>{{ $workplace->description }}</p>
+                        </div>
+                    @endforeach
             </div>
             <div>
                 <form method="POST" action="/cvs/{{ $cv->id }}">

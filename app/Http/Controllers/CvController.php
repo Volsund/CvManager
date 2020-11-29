@@ -13,17 +13,11 @@ class CvController extends Controller
     {
         $cv = Cv::where('id', $cvid)->firstOrFail();
 
-        $address = $cv->address()->first();
-
-        $work = $cv->workplaces()->first();
-
-        $education = $cv->institutions()->first();
-
         return view('cvs.show', [
             'cv' => $cv,
-            'address' => $address,
-            'education' => $education,
-            'work' => $work,
+            'address' => $cv->address,
+            'institutions' => $cv->institutions,
+            'workplaces' => $cv->workplaces,
         ]);
     }
 
@@ -64,6 +58,7 @@ class CvController extends Controller
 
     public function update($id)
     {
+        // dd(request()->all());
         $validatedAttributes = $this->validateInputs();
 
         $cv = Cv::find($id);
@@ -98,17 +93,26 @@ class CvController extends Controller
             'surname' => ['required', 'min:3', 'max:255'],
             'email' => ['required', 'min:4', 'max:255'],
             'phone' => ['required', 'min:8', 'max:255'],
+
             'country' => ['required', 'min:4', 'max:255'],
             'city' => ['required', 'min:3', 'max:255'],
             'address' => ['required', 'min:3', 'max:255'],
             'apartment' => ['max:255'],
             'postal_code' => ['required', 'min:4', 'max:255'],
-            'institution_name' => ['required', 'min:4', 'max:255'],
-            'faculty' => ['required', 'min:4', 'max:255'],
-            'study_program' => ['required', 'min:4', 'max:255'],
-            'degree' => ['required', 'min:4', 'max:255'],
-            'years_studied' => ['required', 'min:1', 'max:255'],
-            'status' => ['required', 'min:4', 'max:255'],
+
+            'institution_name' => ['required', 'min:1'],
+            'institution_name.*' => ['required', 'min:4', 'max:255'],
+            'faculty' => ['required', 'min:1',],
+            'faculty.*' => ['required', 'min:4', 'max:255'],
+            'study_program' => ['required', 'min:1',],
+            'study_program.*' => ['required', 'min:4', 'max:255'],
+            'degree' => ['required', 'min:1',],
+            'degree.*' => ['required', 'min:3', 'max:255'],
+            'years_studied' => ['required', 'min:1',],
+            'years_studied.*' => ['required', 'min:1', 'max:255'],
+            'status' => ['required', 'min:1',],
+            'status.*' => ['required', 'min:1', 'max:255'],
+
             'company_name' => ['required', 'min:3', 'max:255'],
             'position' => ['required', 'min:3', 'max:255'],
             'schedule' => ['required', 'min:3', 'max:255'],

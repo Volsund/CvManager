@@ -157,94 +157,96 @@
                         Add more
                     </button>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="institution_name">Institution name</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="institution_name"
-                                name="institution_name"
-                                placeholder="University Of Zimbabwe"
-                                value="{{ old('institution_name') }}"
-                                required>
-                            @error('institution_name')
-                                <p style="color:red">{{ $errors->first('institution_name') }}</p>
-                            @enderror
+                    <div id="single_institution">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="institution_name">Institution name</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="institution_name"
+                                    name="institution_name[]"
+                                    placeholder="University Of Zimbabwe"
+                                    value="{{ old('institution_name') }}"
+                                    required>
+                                @error('institution_name')
+                                    <p style="color:red">{{ $errors->first('institution_name') }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="faculty">Faculty</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="faculty"
+                                    name="faculty[]"
+                                    placeholder="The Faculty of Arts"
+                                    value="{{ old('faculty') }}"
+                                    required>
+                                @error('faculty')
+                                    <p style="color:red">{{ $errors->first('faculty') }}</p>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="faculty">Faculty</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="faculty"
-                                name="faculty"
-                                placeholder="The Faculty of Arts"
-                                value="{{ old('faculty') }}"
-                                required>
-                            @error('faculty')
-                                <p style="color:red">{{ $errors->first('faculty') }}</p>
-                            @enderror
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="study_program">Study program</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="study_program"
+                                    name="study_program[]"
+                                    placeholder=""
+                                    value="{{ old('study_program') }}"
+                                    required>
+                                @error('study_program')
+                                    <p style="color:red">{{ $errors->first('study_program') }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="degree">Degree</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="degree"
+                                    name="degree[]"
+                                    placeholder="Bachelor's,Master's.."
+                                    value="{{ old('degree') }}"
+                                    required>
+                                @error('degree')
+                                    <p style="color:red">{{ $errors->first('degree') }}</p>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="study_program">Study program</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="study_program"
-                                name="study_program"
-                                placeholder=""
-                                value="{{ old('study_program') }}"
-                                required>
-                            @error('study_program')
-                                <p style="color:red">{{ $errors->first('study_program') }}</p>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="degree">Degree</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="degree"
-                                name="degree"
-                                placeholder="Bachelor's,Master's.."
-                                value="{{ old('degree') }}"
-                                required>
-                            @error('degree')
-                                <p style="color:red">{{ $errors->first('degree') }}</p>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="years_studied">Years studied</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="years_studied"
-                                name="years_studied"
-                                placeholder=""
-                                value="{{ old('years_studied') }}"
-                                required>
-                            @error('years_studied')
-                                <p style="color:red">{{ $errors->first('years_studied') }}</p>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="status">Status</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="status"
-                                name="status"
-                                placeholder="Finished, In progress.."
-                                value="{{ old('status') }}"
-                                required>
-                            @error('status')
-                                <p style="color:red">{{ $errors->first('status') }}</p>
-                            @enderror
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="years_studied">Years studied</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="years_studied"
+                                    name="years_studied[]"
+                                    placeholder=""
+                                    value="{{ old('years_studied') }}"
+                                    required>
+                                @error('years_studied')
+                                    <p style="color:red">{{ $errors->first('years_studied') }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="status">Status</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="status"
+                                    name="status[]"
+                                    placeholder="Finished, In progress.."
+                                    value="{{ old('status') }}"
+                                    required>
+                                @error('status')
+                                    <p style="color:red">{{ $errors->first('status') }}</p>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -345,8 +347,101 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $(function() {
-                $('#education_container').click(function() {
-                    $("#testDiv").append(`<div><h1>Hi there!!!</h1></div>`);
+                $('#addEducation').click(function() {
+                    $("#education_container").append(`
+                        <div id="single_institution">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="institution_name">Institution name</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="institution_name"
+                                            name="institution_name[]"
+                                            placeholder="University Of Zimbabwe"
+                                            value="{{ $education->institution_name }}"
+                                            required>
+                                        @error('institution_name')
+                                                    <p style="color:red">{{ $errors->first('institution_name') }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="faculty">Faculty</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="faculty"
+                                            name="faculty[]"
+                                            placeholder="The Faculty of Arts"
+                                            value="{{ $education->faculty }}"
+                                            required>
+                                        @error('faculty')
+                                                    <p style="color:red">{{ $errors->first('faculty') }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="study_program">Study program</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="study_program"
+                                            name="study_program[]"
+                                            placeholder=""
+                                            value="{{ $education->study_program }}"
+                                            required>
+                                        @error('study_program')
+                                                    <p style="color:red">{{ $errors->first('study_program') }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="degree">Degree</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="degree"
+                                            name="degree[]"
+                                            placeholder="Bachelor's,Master's.."
+                                            value="{{ $education->degree }}"
+                                            required>
+                                        @error('degree')
+                                                    <p style="color:red">{{ $errors->first('degree') }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="years_studied">Years studied</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="years_studied"
+                                            name="years_studied[]"
+                                            placeholder=""
+                                            value="{{ $education->years_studied }}"
+                                            required>
+                                        @error('years_studied')
+                                                    <p style="color:red">{{ $errors->first('years_studied') }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="status">Status</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="status"
+                                            name="status[]"
+                                            placeholder="Finished, In progress.."
+                                            value="{{ $education->status }}"
+                                            required>
+                                        @error('status')
+                                                    <p style="color:red">{{ $errors->first('status') }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        `);
                 });
             });
         });
