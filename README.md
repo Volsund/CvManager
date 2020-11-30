@@ -32,6 +32,7 @@ php artisan serve
 
 ## ToDo Improvements
 - More sections should be added to CV (achievements, etc..)
+- Field validation should be improved.
 - Controller should be refactored to minimize duplicate code in edit/create.
 - Adding tests.
 
