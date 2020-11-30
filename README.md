@@ -7,7 +7,8 @@
 
 ## Description
 
-CV manager for creating and editing Cvs.
+CV manager for creating and editing Cvs made with Laravel and Bootstrap.
+Base css template taken from templated.com.
 
 User can view, create, edit and delete CVs from database. Home page has listed all CVs currently in database. 
 
