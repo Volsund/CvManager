@@ -31,9 +31,26 @@ class CvController extends Controller
 
         $cv->address()->create($validatedAttributes);
 
-        $cv->institutions()->create($validatedAttributes);
+        for ($i = 0; $i < count($validatedAttributes['institution_name']); $i++) {
+            $cv->institutions()->create([
+                'institution_name' => $validatedAttributes['institution_name'][$i],
+                'study_program' => $validatedAttributes['study_program'][$i],
+                'faculty' => $validatedAttributes['faculty'][$i],
+                'degree' => $validatedAttributes['degree'][$i],
+                'years_studied' => $validatedAttributes['years_studied'][$i],
+                'status' => $validatedAttributes['status'][$i],
+            ]);
+        };
 
-        $cv->workplaces()->create($validatedAttributes);
+        for ($i = 0; $i < count($validatedAttributes['company_name']); $i++) {
+            $cv->workplaces()->create([
+                'company_name' => $validatedAttributes['company_name'][$i],
+                'position' => $validatedAttributes['position'][$i],
+                'schedule' => $validatedAttributes['schedule'][$i],
+                'years_worked' => $validatedAttributes['years_worked'][$i],
+                'description' => $validatedAttributes['description'][$i],
+            ]);
+        };
 
         return redirect(route('cvs.index'));
     }
