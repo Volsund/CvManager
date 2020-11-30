@@ -24,9 +24,9 @@ class EducationalInstitutionFactory extends Factory
     {
         return [
             'cv_id' => CV::factory(),
-            'institution_name' => $this->faker->word,
-            'faculty' => $this->faker->word,
-            'study_program' => $this->faker->word,
+            'institution_name' => $this->faker->lexify('University of ?????'),
+            'faculty' => $this->faker->lexify('Faculty of ??????'),
+            'study_program' => $this->faker->lexify('?????????'),
             'degree' => $this->faker->randomElement(["Master's", "Bachelor's",]),
             'years_studied' => $this->faker->numberBetween(1, 20),
             'status' => $this->faker->randomElement(['Finished', 'Dropped out', 'In progress']),

@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cv;
-use App\Models\Address;
-use App\Models\EducationalInstitution;
-use App\Models\Workplace;
 
 class CvController extends Controller
 {
@@ -43,37 +40,67 @@ class CvController extends Controller
 
     public function edit($id)
     {
-        $cv = Cv::find($id);
-        $address = $cv->address()->first();
-        $education = $cv->institutions()->first();
-        $work = $cv->workplaces()->first();
+        $cv = Cv::where('id', $id)->firstOrFail();
 
         return view('cvs.edit', [
             'cv' => $cv,
-            'address' => $address,
-            'education' => $education,
-            'work' => $work,
+            'address' => $cv->address,
+            'institutions' => $cv->institutions,
+            'workplaces' => $cv->workplaces,
         ]);
     }
 
     public function update($id)
     {
-        // dd(request()->all());
         $validatedAttributes = $this->validateInputs();
-
         $cv = Cv::find($id);
-
-        $address = $cv->address()->first();
-        $education = $cv->institutions()->first();
-        $work = $cv->workplaces()->first();
 
         $cv->update($validatedAttributes);
 
-        $address->update($validatedAttributes);
+        $cv->address()->first()->update($validatedAttributes);
 
-        $education->update($validatedAttributes);
+        for ($i = 0; $i < count($validatedAttributes['institution_name']); $i++) {
 
-        $work->update($validatedAttributes);
+            if ($cv->institutions->get($i)) {
+                $cv->institutions->get($i)->update([
+                    'institution_name' => $validatedAttributes['institution_name'][$i],
+                    'study_program' => $validatedAttributes['study_program'][$i],
+                    'faculty' => $validatedAttributes['faculty'][$i],
+                    'degree' => $validatedAttributes['degree'][$i],
+                    'years_studied' => $validatedAttributes['years_studied'][$i],
+                    'status' => $validatedAttributes['status'][$i],
+                ]);
+            } else {
+                $cv->institutions()->create([
+                    'institution_name' => $validatedAttributes['institution_name'][$i],
+                    'study_program' => $validatedAttributes['study_program'][$i],
+                    'faculty' => $validatedAttributes['faculty'][$i],
+                    'degree' => $validatedAttributes['degree'][$i],
+                    'years_studied' => $validatedAttributes['years_studied'][$i],
+                    'status' => $validatedAttributes['status'][$i],
+                ]);
+            };
+        };
+
+        for ($i = 0; $i < count($validatedAttributes['company_name']); $i++) {
+            if ($cv->workplaces->get($i)) {
+                $cv->workplaces->get($i)->update([
+                    'company_name' => $validatedAttributes['company_name'][$i],
+                    'position' => $validatedAttributes['position'][$i],
+                    'schedule' => $validatedAttributes['schedule'][$i],
+                    'years_worked' => $validatedAttributes['years_worked'][$i],
+                    'description' => $validatedAttributes['description'][$i],
+                ]);
+            } else {
+                $cv->workplaces()->create([
+                    'company_name' => $validatedAttributes['company_name'][$i],
+                    'position' => $validatedAttributes['position'][$i],
+                    'schedule' => $validatedAttributes['schedule'][$i],
+                    'years_worked' => $validatedAttributes['years_worked'][$i],
+                    'description' => $validatedAttributes['description'][$i],
+                ]);
+            };
+        };
 
         return redirect($cv->path());
     }
@@ -113,11 +140,16 @@ class CvController extends Controller
             'status' => ['required', 'min:1',],
             'status.*' => ['required', 'min:1', 'max:255'],
 
-            'company_name' => ['required', 'min:3', 'max:255'],
-            'position' => ['required', 'min:3', 'max:255'],
-            'schedule' => ['required', 'min:3', 'max:255'],
-            'years_worked' => ['required', 'min:1', 'max:255'],
-            'description' => ['required', 'min:8', 'max:255'],
+            'company_name' => ['required', 'min:1'],
+            'company_name.*' => ['required', 'min:3', 'max:255'],
+            'position' => ['required', 'min:1'],
+            'position.*' => ['required', 'min:1', 'max:255'],
+            'schedule' => ['required', 'min:1'],
+            'schedule.*' => ['required', 'min:1', 'max:255'],
+            'years_worked' => ['required', 'min:1'],
+            'years_worked.*' => ['required', 'min:1', 'max:255'],
+            'description' => ['required', 'min:1'],
+            'description.*' => ['required', 'min:1', 'max:255'],
         ]);
     }
 }

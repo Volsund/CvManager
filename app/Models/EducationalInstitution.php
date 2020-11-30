@@ -10,6 +10,7 @@ class EducationalInstitution extends Model
     use HasFactory;
 
     protected $fillable = [
+        'cv_id',
         'institution_name',
         'faculty',
         'study_program',

@@ -10,6 +10,7 @@ class Workplace extends Model
     use HasFactory;
 
     protected $fillable = [
+        'cv_id',
         'company_name',
         'position',
         'schedule',

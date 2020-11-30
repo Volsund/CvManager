@@ -24,7 +24,7 @@ class WorkplaceFactory extends Factory
     {
         return [
             'cv_id' => CV::factory(),
-            'company_name' => $this->faker->word,
+            'company_name' => $this->faker->lexify('??????? LTD'),
             'position' => $this->faker->jobTitle,
             'schedule' => $this->faker->randomElement(["Full-time", "Part-time", "Rotating"]),
             'years_worked' => $this->faker->numberBetween(1, 50),
