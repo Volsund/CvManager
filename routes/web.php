@@ -13,3 +13,4 @@ Route::get('/cvs/{cv}', [CvController::class, 'show'])->name('cvs.show');
 Route::put('/cvs/{cv}', [CvController::class, 'update']);
 Route::post('/cvs/{cv}', [CvController::class, 'destroy']);
 Route::get('/cvs/{cv}/edit', [CvController::class, 'edit']);
+Route::get('/test', [CvController::class, 'test']);
